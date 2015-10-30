@@ -13,9 +13,9 @@ This file is supposed to take the html object from SimpleHTMLDom and return song
 
 [
   [
-    'artist'   => '2pac ft. Dr. Dre',
-    'song'     => 'California Love',
-    'playedAt' => '2014-06-28 15:31:12'
+    'artist'   => 'Taylor Swift',
+    'song'     => 'Shake it off',
+    'playedAt' => '2015-10-28 15:31:12'
   ]
 ];
 
