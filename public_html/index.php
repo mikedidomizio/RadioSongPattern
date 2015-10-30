@@ -4,4 +4,5 @@ include '../lib/radio.class.php';
 include '../radio.extended.class.php';
 
 $radio = new \radioStation\radioStation();
-$radio->getSongs();
+$songs = $radio->getSongs();
+$radio->insertSongsThatWerePlayed($songs);
