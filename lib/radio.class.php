@@ -1,6 +1,8 @@
 <?php
     namespace radio;
-    include '../includes/simplehtmldom.php';
+    include '../vendor/sunra/php-simple-html-dom-parser/Src/Sunra/PhpSimple/HtmlDomParser.php';
+
+    use Sunra\PhpSimple\HtmlDomParser;
 
     class radio {
 
@@ -29,7 +31,7 @@
          */
         public function getSongs() {
 
-            $html = file_get_html($this->url);
+            $html = HtmlDomParser::file_get_html($this->url);
 
             $date = $this->getLastRunDate();
 
