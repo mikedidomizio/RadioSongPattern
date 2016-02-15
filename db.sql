@@ -18,23 +18,6 @@ USE `radio-song-pattern`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `history`
---
-
-DROP TABLE IF EXISTS `history`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `history` (
-  `history_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `song_id` int(10) unsigned DEFAULT NULL,
-  `played_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`history_id`),
-  KEY `history.song_id` (`song_id`),
-  CONSTRAINT `history_songs` FOREIGN KEY (`song_id`) REFERENCES `songs` (`song_id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `songs`
 --
 
@@ -48,9 +31,26 @@ CREATE TABLE `songs` (
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`song_id`),
   UNIQUE KEY `artist.song` (`artist`,`song`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+--
+-- Table structure for table `history`
+--
+
+DROP TABLE IF EXISTS `history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `history` (
+  `history_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `song_id` int(10) unsigned DEFAULT NULL,
+  `played_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`history_id`),
+  KEY `history.song_id` (`song_id`),
+  CONSTRAINT `history_songs` FOREIGN KEY (`song_id`) REFERENCES `songs` (`song_id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
