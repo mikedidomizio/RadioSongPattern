@@ -1,0 +1,49 @@
+<?php
+    namespace radioStation;
+
+    require 'lib/radio.class.php';
+
+    class radioStation extends \radio\radio {
+
+        public $url = 'http://www.star933.com/songs/LastSongsPlayed.php?songs=50';
+
+        public $db = [
+            'host' => 'localhost',
+            'user' => 'DBUSER',
+            'pass' => 'DBPASSWORD',
+            'name' => 'radio-song-pattern'
+        ];
+
+        public function __construct() {
+            parent::__construct($this->db);
+        }
+
+        public function getSongData($html, $dateObj) {
+
+            $songs = [];
+
+            foreach($html->find('table > tr') as $tableRow) {
+
+                $artistSong = $tableRow->find('h4', 0)->innertext;
+
+                preg_match('/\d+\.\s(.+)\s\<br\s\/\>\<em\sclass\=song\>(.+)\<\/em\>/', $artistSong, $artistSongMatches);
+
+                $timePlayed = $tableRow->find('p.timePlayed', 0)->plaintext;
+                preg_match('/(\d{1,2}\:\d{2}\s[pa]m$)/', $timePlayed, $timeMatches);
+
+                $timePlayedObj = \DateTime::createFromFormat('H:i a', $timeMatches[1]);
+
+                if($timePlayedObj > $dateObj) {
+                    $songs[] = [
+                        'artist' => $artistSongMatches[1],
+                        'song' => $artistSongMatches[2],
+                        'playedAt' => $timePlayedObj->format('Y-m-d H:i:s')
+                    ];
+                }
+            }
+
+            return $songs;
+        }
+
+    }
+
